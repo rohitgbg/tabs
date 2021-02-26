@@ -19,6 +19,12 @@
   scroll-behavior: smooth;
 }
 
+@media (max-width: 620px) {
+  .tabs-list {
+    width: 60%;
+  }
+}
+
 .tabs-list::-webkit-scrollbar {
   display: none;
 }
