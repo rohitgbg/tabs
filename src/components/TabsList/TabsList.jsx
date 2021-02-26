@@ -92,8 +92,14 @@ const TabsList = () => {
       return tab;
     });
 
-    const prevId =
+    let prevId =
       tabsArray[tabsArray.length - 1] && tabsArray[tabsArray.length - 1].id;
+
+    const isPreviousIdExists = tabsArray.findIndex((tab) => tab.id === prevId);
+
+    if (isPreviousIdExists) {
+      prevId += 11;
+    }
 
     const newTab = { id: prevId + 1, selected: true };
     tabsArr.push(newTab);
