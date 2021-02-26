@@ -1,0 +1,74 @@
+.tabs-list__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 1rem;
+  background-color: #fcf5f5;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0px;
+  position: relative;
+}
+
+.tabs-list {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  width: 75%;
+  scroll-behavior: smooth;
+}
+
+.tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-list__item {
+  margin-left: 2rem;
+  min-width: fit-content;
+  min-width: -moz-fit-content;
+  font-size: 2rem;
+  padding: 0 2.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.tabs-list__item-active {
+  border-bottom: 3px solid blue;
+}
+
+.left-tab-list__angle {
+  padding-left: 2rem;
+  width: 10%;
+}
+.right-tab-list__angle {
+  position: absolute;
+  right: 8rem;
+}
+
+.plus-tab-list {
+  position: absolute;
+  right: 3rem;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.remove__tab {
+  position: absolute;
+  right: 0;
+  top: -8px;
+  display: none;
+  transition: all 0.3s;
+  cursor: pointer;
+  color: gray;
+}
+
+.tabs-list__item:hover .remove__tab {
+  display: block;
+}
+
+.Toastify {
+  font-size: 1.5rem;
+}

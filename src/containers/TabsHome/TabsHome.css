@@ -1,0 +1,9 @@
+.tabs-home__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 2rem;
+  background-color: var(--color-white);
+  font-family: var(--font-montserrat);
+  font-weight: 300;
+}

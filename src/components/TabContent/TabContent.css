@@ -1,0 +1,13 @@
+.tab_content__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.8rem;
+  border: 2px dotted gray;
+  margin-top: 3rem;
+}
+
+.tab_content__container h1 {
+  font-weight: 200;
+}
