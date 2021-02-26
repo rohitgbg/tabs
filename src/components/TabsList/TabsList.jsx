@@ -1,8 +1,10 @@
 import './TabsList.css';
 import { useRef, useState } from 'react';
+import composeRefs from '@seznam/compose-react-refs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TabContent from '../TabContent/TabContent';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 //basic data
 const tabsArr = [
@@ -124,6 +126,18 @@ const TabsList = () => {
       limit: 2,
     });
 
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const tabsArr = Array.from(tabsArray);
+    const [reorderedItem] = tabsArr.splice(result.source.index, 1);
+    tabsArr.splice(result.destination.index, 0, reorderedItem);
+
+    setTabsArray(tabsArr);
+  };
+
   return (
     <>
       <div className="tabs-list__container">
@@ -138,33 +152,51 @@ const TabsList = () => {
         </div>
 
         {/* Tab list */}
-        <ul
-          className="tabs-list"
-          ref={tabsListRef}
-          onScroll={(e) => setCurrentScrollPos(e.target.scrollLeft)}
-        >
-          {tabsArray.map((tab, index) => (
-            <li
-              key={tab.id}
-              onClick={() => handleTabClick(tab.id)}
-              className={`${
-                tab.selected ? 'tabs-list__item-active' : ''
-              } tabs-list__item  `}
-            >
-              {!tab.selected ? (
-                <span
-                  className="remove__tab"
-                  onClick={(e) => handleRemoveTab(e, tab.id)}
-                >
-                  x
-                </span>
-              ) : (
-                ''
-              )}
-              <span>Tab {tab.id}</span>
-            </li>
-          ))}
-        </ul>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="tabsListId" direction="horizontal">
+            {(provided) => (
+              <ul
+                className="tabs-list"
+                ref={composeRefs(tabsListRef, provided.innerRef)}
+                onScroll={(e) => setCurrentScrollPos(e.target.scrollLeft)}
+                {...provided.droppableProps}
+              >
+                {tabsArray.map((tab, index) => (
+                  <Draggable
+                    key={tab.id}
+                    draggableId={tab.id.toString()}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <li
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                        {...provided.dragHandleProps}
+                        onClick={() => handleTabClick(tab.id)}
+                        className={`${
+                          tab.selected ? 'tabs-list__item-active' : ''
+                        } tabs-list__item  `}
+                      >
+                        {!tab.selected ? (
+                          <span
+                            className="remove__tab"
+                            onClick={(e) => handleRemoveTab(e, tab.id)}
+                          >
+                            x
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                        <span>Tab {tab.id}</span>
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
 
         {/* Right Arrow */}
         <div
