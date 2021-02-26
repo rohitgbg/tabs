@@ -121,6 +121,7 @@ const TabsList = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      limit: 2,
     });
 
   return (
@@ -195,6 +196,7 @@ const TabsList = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        limit={2}
       />
     </>
   );
