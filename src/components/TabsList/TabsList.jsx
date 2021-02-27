@@ -30,9 +30,11 @@ const TabsList = () => {
   //Tabs data array of objects
   const [tabsArray, setTabsArray] = useState(tabsArr);
 
+  // To track tabs increased of or not if inc then move scroll to right and show latest added tab
+  const [increaseTabs, setIncreaseTabs] = useState(0);
   useEffect(() => {
     handleRightArrowClick();
-  }, [tabsArray]);
+  }, [increaseTabs]);
 
   // tabs-list dom reference
   const tabsListRef = useRef('');
@@ -86,6 +88,9 @@ const TabsList = () => {
     if (tabsListRef) {
       tabsListRef.current.scrollLeft = tabsListRef.current.scrollWidth;
     }
+
+    setIncreaseTabs(Math.floor(Math.random() * 100));
+
     if (tabsArray.length === 10) {
       notify('Max 10 tabs allowed to create');
       return false;
@@ -109,9 +114,7 @@ const TabsList = () => {
     tabsArr.push(newTab);
 
     setTabsArray(tabsArr);
-    if (tabsListRef) {
-      tabsListRef.current.scrollLeft += 200;
-    }
+
     setCurrentSelectedTab(newTab.id);
   };
 
