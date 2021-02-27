@@ -1,5 +1,5 @@
 import './TabsList.css';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import composeRefs from '@seznam/compose-react-refs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,6 +29,10 @@ const TabsList = () => {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(1);
   //Tabs data array of objects
   const [tabsArray, setTabsArray] = useState(tabsArr);
+
+  useEffect(() => {
+    handleRightArrowClick();
+  }, [tabsArray]);
 
   // tabs-list dom reference
   const tabsListRef = useRef('');
