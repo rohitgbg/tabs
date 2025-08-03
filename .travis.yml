@@ -2,4 +2,4 @@ language: bash
 
 script:
   - echo "Hello, World"
-  - echo "This is a simple Travis CI configuration file."
+  - echo "This is a simple Travis CI configuration file. "
